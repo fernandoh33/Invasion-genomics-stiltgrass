@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --account=def-rieseber
+#SBATCH --account=your_compute_canada_account
 #SBATCH --time=3-00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
