@@ -8,6 +8,13 @@
 module load StdEnv/2023
 module load angsd/0.940
 
+REF=reference/PO1735_Microstegium_vimineum.only.23.pseudochr.fasta
+#generate beagle files, i.e., snp calling in the angsd way
+for chr in $(cat stiltgrass.chrs);
+do angsd -bam bams.vimineum -fai $REF.fai -ref $REF -nInd 431 -minInd 130 -doMajorMinor 1 -doPost 1 -doMaf 1 -doGlf 2 -out geno.for.ld/$chr.vimineum.for.ld.maf0.1.minInd0.5 -gl 2 -minMapQ 30 -minQ 20 -minMaf 0.1 -SNP_pval 1e-6 -nThreads 16 -baq 1 -only_proper_pairs 1 -remove_bads 1 -r $chr:;
+done;
+
+#further filtering of beagle files
 #get headers from beagle and mafs files of any chromosome
 zcat geno.for.ld/Scaffold_10.vimineum.for.ld.maf0.1.minInd0.5.beagle.gz | head -1 > header.beagle
 zcat geno.for.ld/Scaffold_10.vimineum.for.ld.maf0.1.minInd0.5.mafs.gz | head -1 > header.mafs
