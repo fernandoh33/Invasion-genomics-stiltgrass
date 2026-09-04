@@ -12,7 +12,15 @@ module load angsd/0.940
 BEAGLE=ld.estimation/all.chrs.vimineum.lowLD.maf.0.1.beagle.gz
 REF=reference/PO1735_Microstegium_vimineum.only.23.pseudochr.fasta
 
-#pcangsd
+#estimate pca using pcangsd
+pcangsd -b $BEAGLE -t 16 -o out.pcangsd
+#in R
+samples.info=read.table("sample.info.txt",header=F) #sample.info.txt is a file with the name of the samples in a single column, with no header
+out.pca=as.matrix(read.table("~/your_local_folder/out.pcangsd.cov"))
+eigenvalues=eigen(out.pca)
+plot(eigenvalues$vectors)
+out.pca=cbind(samples.info, eigenvalues$vectors[,1:10])
+colnames(out.pca)=c("sample","PC1","PC2","PC3","PC4","PC5","PC6","PC7","PC8","PC9","PC10")
 
 #ngsadmix
 #generating 10 independent runs per K, needed to run Evanno test
