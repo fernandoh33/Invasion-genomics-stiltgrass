@@ -1,0 +1,18 @@
+// Priors and rules file
+// *********************
+
+[PARAMETERS]
+//#isInt? #name   #dist.#min  #max 
+//all Ns are in number of haploid individuals
+1  npresent     logunif     100  1000000   output
+1  Tbot         unif     50   400    output bounded
+1  Tplus         unif     1  50     hide bounded
+0  GR1	 unif     -0.01  0.01     output
+1  nbot     logunif     100  1000000   output
+1  nanc     logunif     100  1000000   output
+
+[COMPLEX PARAMETERS]
+//Assume an island haploid population size of 1000 for all islands
+1 Tendbot = Tbot+Tplus output
+0 RESIZE1 = nbot/npresent hide
+0 RESIZE2 = nanc/nbot hide
