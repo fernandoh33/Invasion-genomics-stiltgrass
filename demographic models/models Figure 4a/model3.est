@@ -1,0 +1,14 @@
+// Priors and rules file
+// *********************
+
+[PARAMETERS]
+//#isInt? #name   #dist.#min  #max 
+//all Ns are in number of haploid individuals
+1  north.q1     logunif     100  1000000   output
+1  north.q3     logunif     100  1000000   output
+1  south.q2     logunif     100  1000000   output
+1  Tdiv         unif     10   10000    output
+0  RESIZE       unif     0.1  10     hide
+
+[COMPLEX PARAMETERS]
+1 Anc = RESIZE*north.q1
